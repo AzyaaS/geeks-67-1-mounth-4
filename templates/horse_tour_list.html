@@ -1,0 +1,29 @@
+<h1>Локации для конных туров</h1>
+{% for i in locations %}
+    <hr>
+    <h2>Название локации - {{ i.title }}</h2>
+    <p>Адрес - {{ i.address }}</p>
+    
+    <h3>Подходит для типов лошадей:</h3>
+    <p>
+        {% for type in i.suitable_horse_types.all %} 
+            {{ type.name }},
+        {% endfor %}
+    </p>
+    
+    {% if i.horse %}
+        <h3>Лошадь для тура:</h3>
+        <p>Кличка - {{ i.horse.name }}</p>
+        <p>Категория лошади - {{ i.horse.category.name }}</p>
+    {% endif %}
+    
+    <h3>Отзывы:</h3>
+    {% for review in i.review_set.all %}
+        <p><strong>{{ review.author }}</strong>: {{ review.text }}</p>
+        <small>Дата: {{ review.created_at }}</small><br>
+    {% empty %}
+        <p>Нет отзывов</p>
+    {% endfor %}
+    
+    <hr>
+{% endfor %}

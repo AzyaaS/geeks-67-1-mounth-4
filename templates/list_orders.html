@@ -1,0 +1,13 @@
+<h1>Список заказов</h1>
+<a href="/create_order/">Добавить заказ</a>
+{% for i in orders_list %}
+    <h2>Заказ №{{ i.id }}</h2>
+    <p>ФИО - {{ i.name_order }}</p>
+    <p>Книга - {{ i.choice_book.title }}</p>
+    <p>Количество - {{ i.count }}</p>
+    <p>Номер карты - {{ i.card }}</p>
+    <p>Статус - {{ i.status }}</p>
+    <p>Дата создания - {{ i.created_at }}</p>
+    <a href="/basket_list/{{ i.id }}/delete/">Удалить</a>
+    <a href="/basket_list/{{ i.id }}/update/">Изменить</a>
+{% endfor %}

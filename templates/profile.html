@@ -1,0 +1,35 @@
+<h1>Личный кабинет</h1>
+<h2>Привет, {{ user.username }}</h2>
+
+
+
+{% if user.photo %}
+    <img src="{{ user.photo.url }}" alt="" width="200" height="200">
+{% endif %}
+
+
+<p>Имя: {{ user.first_name }}</p>
+<p>Фамилия: {{ user.last_name }}</p>
+<p>Email: {{ user.email }}</p>
+
+
+
+{% if user.phone_number %}
+    <p>Телефон: {{ user.phone_number }}</p>
+{% endif %}
+
+{% if user.gender %}
+    <p>Пол: {{ user.gender }}</p>
+{% endif %}
+
+{% if user.birth_date %}
+    <p>Дата рождения: {{ user.birth_date }}</p>
+{% endif %}
+
+
+
+
+<form action="/logout/" method="POST">
+    {% csrf_token %}
+    <button type="submit">Выйти из личного кабинета</button>
+</form>

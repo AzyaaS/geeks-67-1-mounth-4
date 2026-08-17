@@ -1,0 +1,13 @@
+<h1>Авторизация</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    {% if form.errors %}
+        <div style="color: red;">
+            <p>Неверный логин или пароль</p>
+        </div>
+    {% endif %}
+    
+    {{ form.as_p }}
+    <button type="submit">Авторизация</button>
+</form>

@@ -1,9 +1,32 @@
 <h1>Список книг</h1>
-{% for i in books_lst %}
+
+<form method="GET" action="">
+    <input type="text" name="search" placeholder="Поиск по названию" value="{{ search_query }}">
+    <button type="submit">Найти</button>
+</form>
+
+
+{% for i in page_obj %}
 <hr>
     <h2>{{ i.title }}</h2>
     <img src="{{ i.image.url }}" alt="" width="300" height="250">
-    <p>Автор - {{ i.author }}</p>
+    <p>Автор: {{ i.author }}</p>
+    <p>Год: {{ i.year }}</p>
+    <p>Просмотров: {{ i.views }}</p>
     <a href="/book_list/{{ i.id }}/">Подробнее</a>
 <hr>
 {% endfor %}
+
+<div>
+    {% if page_obj.has_previous %}
+        <a href="?page=1{% if search_query %}&search={{ search_query }}{% endif %}">Первая</a>
+        <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}">Предыдущая</a>
+    {% endif %}
+
+    <span>Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}">Следующая</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}{% if search_query %}&search={{ search_query }}{% endif %}">Последняя</a>
+    {% endif %}
+</div>
